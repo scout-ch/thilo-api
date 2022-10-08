@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_target_targets",
+  "info": {
+    "name": "target",
+    "icon": "angle-up",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "rolle": {
+      "type": "string",
+      "required": true
+    }
+  }
+}
