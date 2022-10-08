@@ -25,6 +25,7 @@ RUN dos2unix /docker/set_env_secrets.sh
 # Install strapi
 COPY . .
 RUN npm install
+RUN npm run build
 
 EXPOSE 1337
 ENTRYPOINT [ "/docker/custom_entrypoint.sh" ]
