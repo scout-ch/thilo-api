@@ -1,0 +1,57 @@
+name: Publish docker image
+
+# Controls when the workflow will run
+on:
+  # Trigger the workflow on push
+  # but only for the master branch
+  push:
+    branches:
+      - master
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  push_to_registry:
+    name: Push  to GitHub Packages
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v3
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build and push docker
+        uses: docker/build-push-action@v3
+        with:
+          push: true
+          target: thilo-api-production
+          tags: |
+            ghcr.io/scout-ch/thilo-api/thilo_api:latest
+      - name: Build and push docker
+        uses: docker/build-push-action@v3
+        with:
+          push: true
+          target: thilo-api-production
+          tags: |
+            ghcr.io/scout-ch/thilo-api/thilo_api:latest
+      - name: Deploy to swarm
+        uses: wshihadeh/docker-deployment-action@v2
+        with:
+          remote_docker_host: worker@levell.ch
+          ssh_private_key: ${{ secrets.DOCKER_SSH_PRIVATE_KEY }}
+          ssh_public_key: ${{ secrets.DOCKER_SSH_PUBLIC_KEY }}
+          deployment_mode: docker-swarm
+          copy_stack_file: true
+          pull_images_first: true
+          deploy_path: /home/worker/levell/thilo-api
+          stack_file_name: docker-compose.prod.yml
+          args: --with-registry-auth --prune thilo-api

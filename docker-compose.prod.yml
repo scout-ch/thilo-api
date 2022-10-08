@@ -1,0 +1,65 @@
+version: "3.9"
+
+services:
+  strapi:
+    image: ghcr.io/scout-ch/thilo-api/thilo_api:latest
+    networks:
+      - levell
+      - traefik-public
+    environment:
+      NODE_ENV: production
+      DATABASE_NAME: thilo
+      DATABASE_HOST: DOCKER-SECRET->DATABASE_HOST_THILO
+      DATABASE_PORT: 5432
+      DATABASE_USER: DOCKER-SECRET->DATABASE_USER_THILO
+      DATABASE_PASSWORD: DOCKER-SECRET->DATABASE_PASSWORD_THILO
+      CLOUDINARY_NAME: DOCKER-SECRET->CLOUDINARY_NAME
+      CLOUDINARY_KEY: DOCKER-SECRET->CLOUDINARY_KEY
+      CLOUDINARY_SECRET: DOCKER-SECRET->CLOUDINARY_SECRET
+    secrets:
+      - DATABASE_HOST_THILO
+      - DATABASE_USER_THILO
+      - DATABASE_PASSWORD_THILO
+      - CLOUDINARY_NAME
+      - CLOUDINARY_KEY
+      - CLOUDINARY_SECRET
+    deploy:
+        replicas: 1
+        update_config:
+          parallelism: 1
+          delay: 10s
+        restart_policy:
+          condition: on-failure
+        labels:
+          - traefik.enable=true # enable traefik
+          - traefik.docker.network=traefik-public # put it in the same network as traefik
+          - traefik.constraint-label=traefik-public # assign the same label as traefik so it can be discovered
+          - traefik.http.routers.strapi.rule=Host(`strapi.app.levell.ch`) # listen to port 80 for request to APP_DOMAIN (use together with the line below)
+          - traefik.http.routers.strapi.entrypoints=http
+          - traefik.http.routers.strapi.middlewares=https-redirect
+          - traefik.http.middlewares.strapi.redirectscheme.scheme=https # redirect traffic to https
+          - traefik.http.middlewares.strapi.redirectscheme.permanent=true # redirect traffic to https
+          - traefik.http.routers.strapi-secured.rule=Host(`strapi.app.levell.ch`) # listen to port 443 for request to APP_DOMAIN (use together with the line below)
+          - traefik.http.routers.strapi-secured.entrypoints=https
+          - traefik.http.routers.strapi-secured.tls.certresolver=le # use the Let's Encrypt certificate we set up earlier
+          - traefik.http.services.strapi-secured.loadbalancer.server.port=1337 # ask Traefik to search for port of the service container
+
+networks:
+  levell:
+    external: true
+  traefik-public:
+    external: true
+
+secrets:
+  DATABASE_HOST_THILO:
+    external: true
+  DATABASE_USER_THILO:
+    external: true
+  DATABASE_PASSWORD_THILO:
+    external: true
+  CLOUDINARY_NAME:
+    external: true
+  CLOUDINARY_KEY:
+    external: true
+  CLOUDINARY_SECRET:
+    external: true
