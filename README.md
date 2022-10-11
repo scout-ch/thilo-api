@@ -1,22 +1,65 @@
-# Headless CMS for the Thilo App
+# Thilo API - Backend of Thilo
+Schweizer Pfadibüchlein Thilo, das Original.
 
-done with strapi: https://strapi.io/
+The Thilo contains a lot of interesting and useful information about the Scouts and belongs on every Scout's bedside table and in his or her bag. Contents: The scout movement, the world we live in, scout techniques, first aid, nature and the environment, camp life, etc.
 
-## Available Scripts
+An headless CSM implemented using [Strapi](https://strapi.io/) serves as backend for the thilo project. Strapi provides an intuitive interface to manage the multi medial content and provides well defined REST endpoints to consume the data. 
 
-to start it locally:
+## Big Picture
+![Architecture](./documentation/TechStack.png)
 
-`yarn develop`
+## Components
+### Frontend
+[React Frontend](https://github.com/scout-ch/thilo/tree/master/src)
+
+### Backend
+[Strapi Backend](https://github.com/scout-ch/thilo-api)
+
+## Development
+### Environment Variables
+To manage the behavior of the application the following env variables are available. 
+
+    # strapi server configuration
+    HOST=0.0.0.0
+    PORT=1337
+
+    # Cloudinary authentication information
+    CLOUDINARY_NAME=
+    CLOUDINARY_KEY=
+    CLOUDINARY_SECRET=
+
+    # Database connection information
+    DATABASE_HOST=
+    DATABASE_PORT=
+    DATABASE_NAME=
+    DATABASE_USER=
+    DATABASE_PASSWORD=
+
+
+### Available Scripts
+To start strapi in the development mode:
+`npm run dev`
+
+To start strapi in the production mode: 
+`npm start`
+
+To create the production build of strapi: 
+`npm run build`
+
+## Production
+By using GitHub action the resulting docker container is shipped to a docker swarm infrastructure.
+
+## Management
+The strapi endpoint can be consumed using the endpoints defined in the configuration file [routes.json](./api/chapter/config/routes.json)
+
+To access the admin page of strapi `/admin` must be opend within the browser.
 
 ## Endpoints
-
-### single
-
+### Single Types
 - start-page
 - impressum-page
 
-### multi
-
+### Multi Types
 **Sections**
 => auto generate slugs
 
