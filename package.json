@@ -14,7 +14,7 @@
     "knex": "0.21.18",
     "pg": "^8.8.0",
     "pg-connection-string": "^2.5.0",
-    "slugify": "^1.6.1",
+    "slugify": "^1.6.5",
     "sqlite3": "5.0.0",
     "strapi": "3.6.10",
     "strapi-admin": "3.6.8",
