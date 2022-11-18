@@ -107,6 +107,14 @@
       },
       "type": "string",
       "required": true
+    },
+    "line_height": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "type": "decimal"
     }
   }
 }

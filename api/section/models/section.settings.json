@@ -66,6 +66,22 @@
       "type": "string",
       "required": true,
       "unique": true
+    },
+    "color_primary": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "type": "string"
+    },
+    "color_primary_light": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "type": "string"
     }
   }
 }
