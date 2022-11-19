@@ -3,6 +3,9 @@
 ###############################################################################################
 FROM node:lts as thilo-api-base
 
+# based on https://stackoverflow.com/questions/69394632/webpack-build-failing-with-err-ossl-evp-unsupported
+ENV NODE_OPTIONS=--openssl-legacy-provider
+
 RUN mkdir -p /docker
 WORKDIR /srv/app
 
