@@ -84,7 +84,7 @@
         "images"
       ],
       "plugin": "upload",
-      "required": true,
+      "required": false,
       "pluginOptions": {
         "i18n": {
           "localized": false
