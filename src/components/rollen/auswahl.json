@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_auswahl_auswahls",
+  "info": {
+    "icon": "drafting-compass",
+    "description": "",
+    "displayName": "Rollen"
+  },
+  "options": {},
+  "attributes": {
+    "rolle": {
+      "type": "enumeration",
+      "enum": [
+        "LL",
+        "AL",
+        "C"
+      ],
+      "unique": false,
+      "required": true
+    }
+  }
+}
