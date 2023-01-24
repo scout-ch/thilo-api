@@ -5,15 +5,17 @@
  * to customize this service
  */
 
-module.exports = {
-  /**
-   * Promise to fetch all records
-   *
-   * @return {Promise}
-   */
-  find(params, _populate) {
-    return strapi
-      .query("task")
-      .findMany(params, ["chapters", "chapters.section.slug"]);
-  },
+module.exports = ({ strapi }) => {
+  return {
+    /**
+     * Promise to fetch all records
+     *
+     * @return {Promise}
+     */
+    find(params, _populate) {
+      return strapi
+        .query("task")
+        .findMany(params, ["chapters", "chapters.section.slug"]);
+    },
+  };
 };

@@ -7,17 +7,19 @@
 
 const slugify = require("slugify");
 
-module.exports = {
-  lifecycles: {
-    beforeCreate: async (data) => {
-      if (data.title) {
-        data.Slug = slugify(data.title);
-      }
+module.exports = ({ strapi }) => {
+  return {
+    lifecycles: {
+      beforeCreate: async (data) => {
+        if (data.title) {
+          data.Slug = slugify(data.title);
+        }
+      },
+      beforeUpdate: async (params, data) => {
+        if (data.title) {
+          data.Slug = slugify(data.title);
+        }
+      },
     },
-    beforeUpdate: async (params, data) => {
-      if (data.title) {
-        data.Slug = slugify(data.title);
-      }
-    },
-  },
+  };
 };
