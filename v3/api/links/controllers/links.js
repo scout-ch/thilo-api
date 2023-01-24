@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 /**
  * Read the documentation (https://strapi.io/documentation/developer-docs/latest/development/backend-customization.html#core-controllers)
@@ -14,16 +14,16 @@ module.exports = {
       entities = await strapi.services.links.find(ctx.query);
     }
 
-    return entities.map(entity => {
-      let chapter = entity['chapter']
-      let slug = chapter ? chapter['slug_with_section'] : ''
+    return entities.map((entity) => {
+      let chapter = entity["chapter"];
+      let slug = chapter ? chapter["slug_with_section"] : "";
       return {
-        id: entity['id'],
-        key: entity['key'],
-        title: entity['title'],
-        link: entity['Link'],
-        slug: slug
-      }
+        id: entity["id"],
+        key: entity["key"],
+        title: entity["title"],
+        link: entity["Link"],
+        slug: slug,
+      };
     });
   },
 };
