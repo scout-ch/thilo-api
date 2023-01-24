@@ -1,7 +1,9 @@
-module.exports = ({ env }) => ({
-  host: env('HOST', '0.0.0.0'),
-  port: env.int('PORT', 1337),
+module.exports = ({
+  strapi
+}) => ({
+  host: process.env.HOST || '0.0.0.0',
+  port: process.env.PORT || 1337,
   app: {
-    keys: env.array('APP_KEYS'),
+    keys: ['strapi', 'strapi'],
   },
 });

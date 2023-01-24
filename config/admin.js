@@ -1,8 +1,8 @@
-module.exports = ({ env }) => ({
+module.exports = ({ strapi }) => ({
   auth: {
-    secret: env("ADMIN_JWT_SECRET"),
+    secret: process.env.ADMIN_JWT_SECRET,
   },
   apiToken: {
-    salt: env("API_TOKEN_SALT"),
+    salt: process.env.API_TOKEN_SALT,
   },
 });

@@ -7,49 +7,47 @@
 
 module.exports = ({ strapi }) => {
   return {
-    lifecycles: {
-      beforeCreate: async (data) => {
-        const chapter = data.chapter;
-        const link = data.Link;
+    beforeCreate: async (data) => {
+      const chapter = data.chapter;
+      const link = data.Link;
 
-        if (typeof chapter === "undefined") {
-          if (link === null) {
-            throw strapi.errors.badRequest("Link oder Kapitel auswählen.");
-          }
-        } else {
-          if (link === null && chapter === null) {
-            throw strapi.errors.badRequest("Link oder Kapitel auswählen");
-          }
-
-          if (chapter !== null && link !== null) {
-            throw strapi.errors.badRequest(
-              "Nur Link oder Kapitel, nicht beides"
-            );
-          }
+      if (typeof chapter === "undefined") {
+        if (link === null) {
+          throw strapi.errors.badRequest("Link oder Kapitel auswählen.");
         }
-      },
-      beforeUpdate: async (params, data) => {
-        const chapter = data.chapter;
-        const link = data.Link;
-
-        if (typeof chapter === "undefined") {
-          if (link === null) {
-            throw strapi.errors.badRequest(
-              "Bitte Link oder Kapitel auswählen."
-            );
-          }
-        } else {
-          if (link === null && chapter === null) {
-            throw strapi.errors.badRequest("Bitte Link oder Kapitel auswählen");
-          }
-
-          if (chapter !== null && link !== null) {
-            throw strapi.errors.badRequest(
-              "Nur Link oder Kapitel, nicht beides"
-            );
-          }
+      } else {
+        if (link === null && chapter === null) {
+          throw strapi.errors.badRequest("Link oder Kapitel auswählen");
         }
-      },
+
+        if (chapter !== null && link !== null) {
+          throw strapi.errors.badRequest(
+            "Nur Link oder Kapitel, nicht beides"
+          );
+        }
+      }
+    },
+    beforeUpdate: async (params, data) => {
+      const chapter = data.chapter;
+      const link = data.Link;
+
+      if (typeof chapter === "undefined") {
+        if (link === null) {
+          throw strapi.errors.badRequest(
+            "Bitte Link oder Kapitel auswählen."
+          );
+        }
+      } else {
+        if (link === null && chapter === null) {
+          throw strapi.errors.badRequest("Bitte Link oder Kapitel auswählen");
+        }
+
+        if (chapter !== null && link !== null) {
+          throw strapi.errors.badRequest(
+            "Nur Link oder Kapitel, nicht beides"
+          );
+        }
+      }
     },
   };
 };

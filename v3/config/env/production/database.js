@@ -1,6 +1,8 @@
 const parse = require('pg-connection-string').parse;
 
-module.exports = ({ env }) => ({
+module.exports = ({
+  strapi
+}) => ({
   defaultConnection: 'default',
   connections: {
     default: {

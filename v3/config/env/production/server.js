@@ -1,7 +1,8 @@
-module.exports = ({ env }) => ({
-  url: env('MY_HEROKU_URL'),
+module.exports = ({
+  strapi
+}) => ({
+  url: process.env.MY_HEROKU_URL,
 });
 
- 
 
- 
+

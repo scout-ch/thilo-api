@@ -1,11 +1,11 @@
-module.exports = ({ env }) => ({
+module.exports = ({ strapi }) => ({
   defaultConnection: "default",
   connections: {
     default: {
       connector: "bookshelf",
       settings: {
         client: "sqlite",
-        filename: env("DATABASE_FILENAME", ".tmp/data.db"),
+        filename: process.env.DATABASE_FILENAME || ".tmp / data.db",
       },
       options: {
         useNullAsDefault: true,

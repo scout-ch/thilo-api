@@ -1,5 +1,7 @@
 
-module.exports = ({ env }) => ({
+module.exports = ({
+  strapi
+}) => ({
   upload: {
     provider: 'cloudinary',
     providerOptions: {

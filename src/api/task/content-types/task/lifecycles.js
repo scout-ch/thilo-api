@@ -8,16 +8,14 @@
 const slugify = require("slugify");
 
 module.exports = {
-  lifecycles: {
-    beforeCreate: async (data) => {
-      if (data.title) {
-        data.Slug = slugify(data.title);
-      }
-    },
-    beforeUpdate: async (params, data) => {
-      if (data.title) {
-        data.Slug = slugify(data.title);
-      }
-    },
+  beforeCreate: async (data) => {
+    if (data.title) {
+      data.Slug = slugify(data.title);
+    }
+  },
+  beforeUpdate: async (params, data) => {
+    if (data.title) {
+      data.Slug = slugify(data.title);
+    }
   },
 };
