@@ -30,14 +30,14 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Build and push docker
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           push: true
           target: thilo-api-production
           tags: |
             ghcr.io/scout-ch/thilo-api/thilo_api:latest
       - name: Build and push docker
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           push: true
           target: thilo-api-production
