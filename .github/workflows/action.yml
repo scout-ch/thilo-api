@@ -43,15 +43,3 @@ jobs:
           target: thilo-api-production
           tags: |
             ghcr.io/scout-ch/thilo-api/thilo_api:latest
-      - name: Deploy to swarm
-        uses: wshihadeh/docker-deployment-action@v2
-        with:
-          remote_docker_host: worker@levell.ch
-          ssh_private_key: ${{ secrets.DOCKER_SSH_PRIVATE_KEY }}
-          ssh_public_key: ${{ secrets.DOCKER_SSH_PUBLIC_KEY }}
-          deployment_mode: docker-swarm
-          copy_stack_file: true
-          pull_images_first: true
-          deploy_path: /home/worker/levell/thilo-api
-          stack_file_name: docker-compose.prod.yml
-          args: --with-registry-auth --prune thilo-api
